@@ -1,0 +1,131 @@
+/* ON SELECTIONE LA BASE DE DONNEES*/
+USE theaterDB;
+
+
+/* ON INSERE DES DONNEES */
+INSERT INTO ticket (client_id, event_id, price_id)
+VALUES
+(9, 12, 3),
+(2, 14, 2),
+(5, 19, 1),
+(14, 7, 1),
+(2, 17, 1),
+(16, 8, 3),
+(17, 4, 2),
+(13, 21, 1),
+(5, 2, 1),
+(14, 9, 1),
+(1, 8, 3),
+(10, 2, 2),
+(12, 2, 3),
+(12, 16, 1),
+(11, 16, 3),
+(7, 1, 3),
+(8, 7, 3),
+(11, 21, 1),
+(13, 21, 3),
+(17, 16, 1),
+(14, 3, 2),
+(3, 1, 3),
+(20, 1, 2),
+(10, 12, 2),
+(11, 2, 1),
+(14, 13, 2),
+(14, 15, 2),
+(18, 9, 2),
+(16, 13, 3),
+(17, 11, 3),
+(10, 21, 2),
+(6, 14, 2),
+(11, 12, 3),
+(10, 19, 3),
+(4, 2, 2),
+(4, 20, 3),
+(20, 10, 2),
+(8, 9, 1),
+(2, 18, 3),
+(20, 4, 1),
+(9, 15, 2),
+(9, 1, 1),
+(6, 11, 2),
+(1, 14, 3),
+(16, 19, 2),
+(12, 4, 3),
+(12, 20, 2),
+(17, 20, 2),
+(2, 7, 3),
+(19, 21, 2),
+(1, 11, 3),
+(17, 7, 3),
+(6, 16, 2),
+(17, 7, 2),
+(15, 10, 3),
+(15, 16, 3),
+(6, 21, 1),
+(19, 12, 1),
+(14, 14, 3),
+(16, 12, 3),
+(14, 15, 2),
+(5, 15, 3),
+(12, 16, 2),
+(6, 14, 2),
+(20, 7, 3),
+(17, 19, 3),
+(10, 5, 3),
+(3, 5, 2),
+(5, 15, 1),
+(17, 18, 3),
+(1, 9, 3),
+(1, 20, 1),
+(3, 3, 2),
+(5, 15, 3),
+(1, 17, 1),
+(20, 10, 2),
+(12, 11, 3),
+(15, 7, 3),
+(20, 12, 3),
+(15, 18, 2),
+(5, 7, 3),
+(17, 7, 1),
+(10, 19, 2),
+(14, 9, 3),
+(13, 7, 3),
+(15, 2, 3),
+(15, 11, 2),
+(20, 15, 1),
+(14, 1, 1),
+(6, 13, 1),
+(7, 17, 3),
+(2, 4, 3),
+(16, 13, 2),
+(11, 15, 3),
+(18, 21, 1),
+(10, 1, 3),
+(10, 16, 2),
+(8, 1, 1),
+(6, 11, 1),
+(19, 7, 1);
+
+SELECT
+f.film_title AS 'FILM',
+r.room_number AS 'SALLE',
+r.room_seats AS 'PLACES EN SALLE',
+r.room_seats - COUNT(t.event_id) AS 'PLACES DISPONIBLES',
+COUNT(t.event_id) AS 'TICKETS ACHETES'
+FROM event e 
+JOIN ticket t ON e.event_id = t.event_id
+JOIN room r  ON e.room_id = r.room_id
+JOIN film f ON e.film_id = f.film_id
+GROUP BY t.event_id;
+
+SELECT
+CONCAT(c.client_ln, ' ', c.client_fn) AS 'CLIENT',
+c.client_email AS 'EMAIL',
+p.price_value AS 'PRIX DU BILLET',
+p.price_name AS 'INTITULE DU BILLET'
+FROM ticket t
+JOIN client c ON t.client_id = c.client_id
+JOIN event e ON t.event_id = e.event_id
+JOIN film f ON e.film_id = f.film_id
+JOIN price p ON t.price_id = p.price_id
+WHERE t.event_id = 7;

@@ -1,0 +1,6 @@
+COMMENT IMPORTER LA BASE DE DONNEES ? 
+    1. Se connecter à la base de données via l'utilitaire de commande (mysql -u root -p)
+    2. Créer la base de données theaterDB (CREATE DATABASE IF NOT EXISTS theaterDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;)
+    3. Lancer le fichier SQL 'users.sql' pour créer les rôles et utilisateurs
+    4. Se déconnecter puis se reconnecter à la base de données (mysql -u root -p theaterDB < [chemin d'accès du fichier 'global_database_cinema.sql'])
+    5. L'import de la base de données est fini. 
